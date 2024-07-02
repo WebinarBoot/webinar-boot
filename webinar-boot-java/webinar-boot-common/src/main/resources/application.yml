@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: dev
+
+  # redis配置
+  redis:
+    host: localhost
+    port: 6379
+    #我没有给redis设置账号和密码
+    #username: guest
+    #password: guest
+
+
+# 日志输出配置
+logging:
+  level:
+    root: info
+
+
+#jwt 自定义配置
+Jwt:
+  #jwt签名私钥
+  secretKey: sdsdsd23232323
+
