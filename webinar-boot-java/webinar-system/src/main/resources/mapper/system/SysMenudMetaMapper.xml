@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webinar.system.mapper.SysMenudMetaMapper">
+
+    <resultMap id="BaseResultMap" type="com.webinar.common.core.domain.entity.SysMenuDMeta">
+            <id property="menuMetaId" column="menu_meta_id" jdbcType="INTEGER"/>
+            <result property="menuId" column="menu_id" jdbcType="INTEGER"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="ignoreAuth" column="ignore_auth" jdbcType="VARCHAR"/>
+            <result property="roles" column="roles" jdbcType="VARCHAR"/>
+            <result property="ignoreKeepAlive" column="ignore_keep_alive" jdbcType="BIGINT"/>
+            <result property="affix" column="affix" jdbcType="BIGINT"/>
+            <result property="frameSrc" column="frame_src" jdbcType="VARCHAR"/>
+            <result property="transitionName" column="transition_name" jdbcType="VARCHAR"/>
+            <result property="hideBreadcrumb" column="hide_breadcrumb" jdbcType="BIGINT"/>
+            <result property="carryParam" column="carry_param" jdbcType="BIGINT"/>
+            <result property="hideChildreninMenu" column="hide_childrenin_menu" jdbcType="BIGINT"/>
+            <result property="currentActiveMenu" column="current_active_menu" jdbcType="VARCHAR"/>
+            <result property="hideTab" column="hide_tab" jdbcType="BIGINT"/>
+            <result property="hideMenu" column="hide_menu" jdbcType="BIGINT"/>
+            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        menuMetaId,menuId,title,
+        ignoreAuth,roles,ignoreKeepAlive,
+        affix,frameSrc,transitionName,
+        hideBreadcrumb,carryParam,hideChildreninMenu,
+        currentActiveMenu,hideTab,hideMenu,
+        icon,update_by,create_time,
+        create_by,update_time,remark
+    </sql>
+</mapper>

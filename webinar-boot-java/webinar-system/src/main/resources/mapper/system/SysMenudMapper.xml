@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webinar.system.mapper.SysMenudMapper">
+
+    <resultMap id="BaseResultMap" type="com.webinar.common.core.domain.entity.SysMenuD">
+            <id property="menuId" column="menu_id" jdbcType="INTEGER"/>
+            <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="url" column="url" jdbcType="VARCHAR"/>
+            <result property="perms" column="perms" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="INTEGER"/>
+            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="orderNum" column="order_num" jdbcType="INTEGER"/>
+            <result property="actionType" column="action_type" jdbcType="VARCHAR"/>
+            <result property="sideMenuId" column="side_menu_id" jdbcType="INTEGER"/>
+            <result property="systemId" column="system_id" jdbcType="INTEGER"/>
+            <result property="extUrl" column="ext_url" jdbcType="VARCHAR"/>
+            <result property="component" column="component" jdbcType="VARCHAR"/>
+            <result property="tagDot" column="tag_dot" jdbcType="VARCHAR"/>
+            <result property="tagContent" column="tag_content" jdbcType="VARCHAR"/>
+            <result property="tagType" column="tag_type" jdbcType="VARCHAR"/>
+            <result property="props" column="props" jdbcType="VARCHAR"/>
+            <result property="alias" column="alias" jdbcType="VARCHAR"/>
+            <result property="caseSensitive" column="case_sensitive" jdbcType="VARCHAR"/>
+            <result property="path" column="path" jdbcType="VARCHAR"/>
+            <result property="pathToRegexpOptions" column="path_to_regexp_options" jdbcType="VARCHAR"/>
+            <result property="redirect" column="redirect" jdbcType="VARCHAR"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectMenuPermsByRoleId" parameterType="Long" resultType="String">
+        SELECT DISTINCT
+            m.perms
+        FROM
+            sys_menuD m
+                LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id
+        where rm.role_id = #{roleId}
+    </select>
+    <select id="getMenuByUserId" resultMap="BaseResultMap">
+        SELECT
+            sm.*
+        FROM
+            sys_user_role sur
+                INNER JOIN sys_role_menu srm ON sur.role_id = srm.role_id
+                INNER JOIN sys_menuD sm ON sm.menu_id = srm.menu_id
+        WHERE
+            sur.user_id = #{userId}
+          AND sm.perms is not NULL
+          AND sm.perms != ''
+    </select>
+    <select id="queryNotButtonList" resultType="com.webinar.common.core.domain.entity.SysMenuD">
+        select * from sys_menuD where type != 2 and system_id = 2 order by order_num asc
+    </select>
+    <select id="selectMenuPermsByUserId" parameterType="Long" resultType="String">
+        select distinct m.perms
+        from sys_menuD m
+                 left join sys_role_menu rm on m.menu_id = rm.menu_id
+                 left join sys_user_role ur on rm.role_id = ur.role_id
+                 left join sys_role r on r.role_id = ur.role_id
+        where r.status = '0' and m.perms is not null and ur.user_id = #{userId}
+    </select>
+    <select id="getMenuAll" resultMap="BaseResultMap">
+        SELECT
+            sm.*
+        FROM
+            sys_user_role sur
+                INNER JOIN sys_role_menu srm ON sur.role_id = srm.role_id
+                INNER JOIN sys_menuD sm ON sm.menu_id = srm.menu_id
+        WHERE
+            sm.perms is not NULL
+          AND sm.perms != ''
+    </select>
+    <sql id="Base_Column_List">
+        menu_id,parent_id,name,
+        url,perms,type,
+        icon,order_num,action_type,
+        side_menu_id,system_id,ext_url,
+        component,tag_dot,tag_content,
+        tag_type,props,alias,
+        case_sensitive,path,path_to_regexp_options,
+        redirect,create_by,create_time,
+        update_by,update_time,remark
+    </sql>
+</mapper>
