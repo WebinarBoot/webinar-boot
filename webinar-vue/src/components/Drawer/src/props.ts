@@ -1,7 +1,8 @@
-import type { PropType } from 'vue'
+import type { PropType } from 'vue';
 
-import { useI18n } from '/@/hooks/web/useI18n'
-const { t } = useI18n()
+import { useI18n } from '@/hooks/web/useI18n';
+
+const { t } = useI18n();
 
 export const footerProps = {
   confirmLoading: { type: Boolean },
@@ -23,13 +24,13 @@ export const footerProps = {
     type: [String, Number] as PropType<string | number>,
     default: 60,
   },
-}
+};
 export const basicProps = {
   isDetail: { type: Boolean },
   title: { type: String, default: '' },
   loadingText: { type: String },
   showDetailBack: { type: Boolean, default: true },
-  visible: { type: Boolean },
+  open: { type: Boolean },
   loading: { type: Boolean },
   maskClosable: { type: Boolean, default: true },
   getContainer: {
@@ -41,4 +42,4 @@ export const basicProps = {
   },
   destroyOnClose: { type: Boolean },
   ...footerProps,
-}
+};

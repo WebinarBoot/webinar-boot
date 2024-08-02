@@ -4,9 +4,9 @@
   </Card>
 </template>
 <script lang="ts" setup>
-  import { Ref, ref, watch } from 'vue'
-  import { Card } from 'ant-design-vue'
-  import { useECharts } from '/@/hooks/web/useECharts'
+  import { Ref, ref, watch } from 'vue';
+  import { Card } from 'ant-design-vue';
+  import { useECharts } from '@/hooks/web/useECharts';
 
   const props = defineProps({
     loading: Boolean,
@@ -18,16 +18,16 @@
       type: String as PropType<string>,
       default: '300px',
     },
-  })
+  });
 
-  const chartRef = ref<HTMLDivElement | null>(null)
-  const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>)
+  const chartRef = ref<HTMLDivElement | null>(null);
+  const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>);
 
   watch(
     () => props.loading,
     () => {
       if (props.loading) {
-        return
+        return;
       }
       setOptions({
         tooltip: {
@@ -36,7 +36,7 @@
 
         series: [
           {
-            name: '访问来源',
+            name: '成交占比',
             type: 'pie',
             radius: '80%',
             center: ['50%', '50%'],
@@ -47,18 +47,18 @@
               { value: 274, name: '化妆品' },
               { value: 400, name: '家居' },
             ].sort(function (a, b) {
-              return a.value - b.value
+              return a.value - b.value;
             }),
             roseType: 'radius',
             animationType: 'scale',
             animationEasing: 'exponentialInOut',
             animationDelay: function () {
-              return Math.random() * 400
+              return Math.random() * 400;
             },
           },
         ],
-      })
+      });
     },
     { immediate: true },
-  )
+  );
 </script>

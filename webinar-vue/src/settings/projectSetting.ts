@@ -1,6 +1,6 @@
-import type { ProjectConfig } from '/#/config'
-import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '/@/enums/menuEnum'
-import { CacheTypeEnum } from '/@/enums/cacheEnum'
+import type { ProjectConfig } from '#/config';
+import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '@/enums/menuEnum';
+import { CacheTypeEnum } from '@/enums/cacheEnum';
 import {
   ContentEnum,
   PermissionModeEnum,
@@ -8,9 +8,12 @@ import {
   RouterTransitionEnum,
   SettingButtonPositionEnum,
   SessionTimeoutProcessingEnum,
-} from '/@/enums/appEnum'
-import { SIDE_BAR_BG_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST } from './designSetting'
-import { primaryColor } from '../../build/config/themeConfig'
+} from '@/enums/appEnum';
+import {
+  SIDE_BAR_BG_COLOR_LIST,
+  HEADER_PRESET_BG_COLOR_LIST,
+  APP_PRESET_COLOR_LIST,
+} from './designSetting';
 
 // ! You need to clear the browser cache after the change
 const setting: ProjectConfig = {
@@ -24,7 +27,7 @@ const setting: ProjectConfig = {
   settingButtonPosition: SettingButtonPositionEnum.AUTO,
 
   // Permission mode
-  permissionMode: PermissionModeEnum.ROUTE_MAPPING,
+  permissionMode: PermissionModeEnum.BACK,
 
   // Permission-related cache is stored in sessionStorage or localStorage
   permissionCacheType: CacheTypeEnum.LOCAL,
@@ -33,7 +36,7 @@ const setting: ProjectConfig = {
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum.ROUTE_JUMP,
 
   // color
-  themeColor: primaryColor,
+  themeColor: APP_PRESET_COLOR_LIST[0],
 
   // Website gray mode, open for possible mourning dates
   grayMode: false,
@@ -63,6 +66,8 @@ const setting: ProjectConfig = {
     show: true,
     // theme
     theme: ThemeEnum.LIGHT,
+    // Whether to enable the lock screen function
+    useLockPage: true,
     // Whether to show the full screen button
     showFullScreen: true,
     // Whether to show the document button
@@ -71,6 +76,7 @@ const setting: ProjectConfig = {
     showNotice: true,
     // Whether to display the menu search
     showSearch: true,
+    showApi: true,
   },
 
   // Menu configuration
@@ -129,6 +135,8 @@ const setting: ProjectConfig = {
     showRedo: true,
     // Whether to show the collapse button
     showFold: true,
+    // Auto collapsed
+    autoCollapse: false,
   },
 
   // Transition Setting
@@ -151,6 +159,9 @@ const setting: ProjectConfig = {
   // Whether to enable KeepAlive cache is best to close during development, otherwise the cache needs to be cleared every time
   openKeepAlive: true,
 
+  // Automatic screen lock time, 0 does not lock the screen. Unit minute default 0
+  lockTime: 0,
+
   // Whether to show breadcrumbs
   showBreadCrumb: true,
 
@@ -172,6 +183,6 @@ const setting: ProjectConfig = {
   // Whether to cancel the http request that has been sent but not responded when switching the interface.
   // If it is enabled, I want to overwrite a single interface. Can be set in a separate interface
   removeAllHttpPending: false,
-}
+};
 
-export default setting
+export default setting;

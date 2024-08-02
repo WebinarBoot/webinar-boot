@@ -1,5 +1,5 @@
-export const SIDE_BAR_MINI_WIDTH = 48
-export const SIDE_BAR_SHOW_TIT_MINI_WIDTH = 80
+export const SIDE_BAR_MINI_WIDTH = 48;
+export const SIDE_BAR_SHOW_TIT_MINI_WIDTH = 80;
 
 export enum ContentEnum {
   // auto width
@@ -32,7 +32,7 @@ export enum PermissionModeEnum {
   // role
   // 角色权限
   ROLE = 'ROLE',
-  // black
+  // back
   // 后端
   BACK = 'BACK',
   // route mapping

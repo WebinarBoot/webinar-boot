@@ -13,61 +13,51 @@
     </Tooltip>
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent, computed } from 'vue'
-  import { FullscreenExitOutlined, FullscreenOutlined, CloseOutlined } from '@ant-design/icons-vue'
-  import { useDesign } from '/@/hooks/web/useDesign'
-  import { Tooltip } from 'ant-design-vue'
-  import { useI18n } from '/@/hooks/web/useI18n'
+<script lang="ts" setup>
+  import { computed } from 'vue';
+  import { FullscreenExitOutlined, FullscreenOutlined, CloseOutlined } from '@ant-design/icons-vue';
+  import { Tooltip } from 'ant-design-vue';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
 
-  export default defineComponent({
-    name: 'ModalClose',
-    components: { Tooltip, FullscreenExitOutlined, FullscreenOutlined, CloseOutlined },
-    props: {
-      canFullscreen: { type: Boolean, default: true },
-      fullScreen: { type: Boolean },
-    },
-    emits: ['cancel', 'fullscreen'],
-    setup(props, { emit }) {
-      const { prefixCls } = useDesign('basic-modal-close')
-      const { t } = useI18n()
+  defineOptions({ name: 'ModalClose' });
 
-      const getClass = computed(() => {
-        return [
-          prefixCls,
-          `${prefixCls}--custom`,
-          {
-            [`${prefixCls}--can-full`]: props.canFullscreen,
-          },
-        ]
-      })
+  const props = defineProps({
+    canFullscreen: { type: Boolean, default: true },
+    fullScreen: { type: Boolean },
+  });
 
-      function handleCancel(e: Event) {
-        emit('cancel', e)
-      }
+  const emit = defineEmits(['cancel', 'fullscreen']);
 
-      function handleFullScreen(e: Event) {
-        e?.stopPropagation()
-        e?.preventDefault()
-        emit('fullscreen')
-      }
+  const { prefixCls } = useDesign('basic-modal-close');
+  const { t } = useI18n();
 
-      return {
-        t,
-        getClass,
-        prefixCls,
-        handleCancel,
-        handleFullScreen,
-      }
-    },
-  })
+  const getClass = computed(() => {
+    return [
+      prefixCls,
+      `${prefixCls}--custom`,
+      {
+        [`${prefixCls}--can-full`]: props.canFullscreen,
+      },
+    ];
+  });
+
+  function handleCancel(e: Event) {
+    emit('cancel', e);
+  }
+
+  function handleFullScreen(e: Event) {
+    e?.stopPropagation();
+    e?.preventDefault();
+    emit('fullscreen');
+  }
 </script>
 <style lang="less">
   @prefix-cls: ~'@{namespace}-basic-modal-close';
   .@{prefix-cls} {
     display: flex;
-    height: 95%;
     align-items: center;
+    height: 95%;
 
     > span {
       margin-left: 48px;

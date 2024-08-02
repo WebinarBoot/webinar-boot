@@ -1,5 +1,8 @@
 <template>
   <Button v-bind="getBindValue" :class="getButtonClass" @click="onClick">
+    <template #icon>
+      <slot name="icon"></slot>
+    </template>
     <template #default="data">
       <Icon :icon="preIcon" v-if="preIcon" :size="iconSize" />
       <slot v-bind="data || {}"></slot>
@@ -8,33 +11,32 @@
   </Button>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-  export default defineComponent({
-    name: 'AButton',
-    inheritAttrs: false,
-  })
-</script>
 <script lang="ts" setup>
-  import { computed, unref } from 'vue'
-  import { Button } from 'ant-design-vue'
-  import Icon from '/@/components/Icon/src/Icon.vue'
-  import { buttonProps } from './props'
-  import { useAttrs } from '/@/hooks/core/useAttrs'
+  import { Button } from 'ant-design-vue';
+  import { ComponentOptionsMixin, computed, unref } from 'vue';
+  import Icon from '@/components/Icon/Icon.vue';
+  import { buttonProps } from './props';
+  import { useAttrs } from '@vben/hooks';
 
-  const props = defineProps(buttonProps)
+  defineOptions({
+    name: 'AButton',
+    extends: Button as ComponentOptionsMixin,
+    inheritAttrs: false,
+  });
+
+  const props = defineProps(buttonProps);
   // get component class
-  const attrs = useAttrs({ excludeDefaultKeys: false })
+  const attrs = useAttrs({ excludeDefaultKeys: false });
   const getButtonClass = computed(() => {
-    const { color, disabled } = props
+    const { color, disabled } = props;
     return [
       {
         [`ant-btn-${color}`]: !!color,
         [`is-disabled`]: disabled,
       },
-    ]
-  })
+    ];
+  });
 
   // get inherit binding value
-  const getBindValue = computed(() => ({ ...unref(attrs), ...props }))
+  const getBindValue = computed(() => ({ ...unref(attrs), ...props }));
 </script>
